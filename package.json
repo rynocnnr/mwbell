@@ -1,0 +1,24 @@
+{
+  "name": "gulp-sass-foundation",
+  "version": "1.0.0",
+  "description": "Boilerplate for a project using Gulp Sass and Foundation.",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "bower install"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.16.0",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-image": "^2.7.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.2",
+    "gulp-shell": "^0.5.2",
+    "gulp-swig": "^0.8.0",
+    "gulp-uglify": "^2.0.0",
+    "gulp-uglifycss": "^1.0.6"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "gulp-sass-foundation",
+  "description": "Boilerplate for a project using Gulp Sass and Foundation.",
+  "main": "",
+  "authors": [
+    "Ryan O'Connor"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation": "#5.5.3",
+    "jquery": "#2.2.4"
+  }
+}
