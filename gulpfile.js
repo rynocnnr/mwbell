@@ -15,7 +15,7 @@ var paths = {
       'assets': './assets',
       'css': './assets/styles',
       'js': './assets/scripts',
-      'img': './assets/img'
+      'img': './assets/images'
     }
 
 var dest = {
@@ -67,7 +67,7 @@ gulp.task('styles', function() {
   ])
   .pipe(sass({
     includePaths: [
-      paths.bower + '/foundation/scss'
+      paths.bower + '/foundation-sites/scss'
     ]
   }))
   .pipe(autoprefixer(
@@ -93,20 +93,16 @@ gulp.task('styles', function() {
 // Scripts
 gulp.task('scripts', function() {
   gulp.src([
+    paths.bower + '/modernizr/modernizr.js',
     paths.bower + '/jquery/dist/jquery.js',
-    paths.bower + '/foundation/js/foundation.js',
-    paths.bower + '/foundation/js/foundation.alert.js',
+    paths.bower + '/foundation-sites/js/foundation.js',
+    paths.bower + '/foundation-sites/js/foundation.alert.js',
     paths.js + '/app.js'
   ])
   .pipe(concat('app.js'))
   .pipe(rename('app.min.js'))
   .pipe(uglify())
   .pipe(gulp.dest(dest.js));
-
-  return gulp.src(paths.bower + '/modernizr/modernizr.js')
-    .pipe(rename('modernizr.min.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest(dest.js));
 });
 
 // Default Task
