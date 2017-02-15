@@ -1,0 +1,44 @@
+$white: #ffffff;
+$gray: #979797;
+$light-gray: #D5D1CC;
+$dark-gray: #4A4238;
+$orange: #F86624;
+$dark-orange: #C53D00;
+$brown: #251605;
+$light-brown: #56351E;
+$dark-brown: #160D03;
+$tan: #EEEBE7;
+$light-tan: #F9F8F7;
+
+// Convert font-size to rem
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
+
+// CSS Transitions
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+// Linear Gradients
+@mixin linear-gradient($direction, $color-stops...) {
+  // Direction has been omitted and happens to be a color-stop
+  @if is-direction($direction) == false {
+    $color-stops: $direction, $color-stops;
+    $direction: 180deg;
+  }
+
+  background: nth(nth($color-stops, 1), 1);
+  background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
+  background: linear-gradient($direction, $color-stops);
+}

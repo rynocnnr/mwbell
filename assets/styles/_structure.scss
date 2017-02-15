@@ -1,0 +1,76 @@
+body {
+  background-color: $dark-brown;
+  .button {
+    background-color: $orange;
+    color: $white;
+    padding: 15px 50px;
+    border-radius: 3px;
+    @include font-size(12px);
+    @include transition(background-color .5s ease);
+    &:hover {
+      background-color: darken($orange, 10%);
+    }
+  }
+  .button-reverse {
+    background-color: rgba($white, .2);
+    color: $white;
+    &:hover {
+      background-color: rgba($white, .3);
+    }
+  }
+  .button-outline {
+    background-color: transparent;
+    border: solid 1px rgba($orange, .3);
+    color: $orange;
+    &:hover {
+      background-color: rgba($orange, .1);
+      color: $orange;
+    }
+  }
+}
+header {
+  background-color: $white;
+  .topbar {
+    background-color: $brown;
+    color: $tan;
+    padding: 10px 0px;
+    @include font-size(13px);
+  }
+}
+section.main-image {
+  @include linear-gradient(115deg, blue 0%, rebeccapurple 25%, $dark-orange 100%);
+  padding: 100px;
+  color: $white;
+}
+section.services {
+  background-color: $tan;
+}
+section.featured-services {
+  background-color: $light-tan;
+}
+section.c2a {
+  @include linear-gradient(135deg, $dark-orange 30%, $orange 80%);
+  padding: 30px 0px;
+  color: $white;
+  @include font-size(14px);
+  h2 {
+    font-size: 24px;
+  }
+}
+footer {
+  background-color: $brown;
+  color: rgba($tan, .7);
+  padding-top: 30px;
+  @include font-size(12px);
+  h2 {
+    font-size: 14px;
+    color: $tan;
+  }
+  .ftrext {
+    padding-top: 30px;
+    margin-top: 30px;
+    background-color: $dark-brown;
+    color: rgba($tan, .3);
+    @include font-size(13px);
+  }
+}
