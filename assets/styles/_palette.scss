@@ -1,3 +1,4 @@
+// Color Palette
 $white: #ffffff;
 $gray: #979797;
 $light-gray: #D5D1CC;
@@ -9,13 +10,16 @@ $light-brown: #56351E;
 $dark-brown: #160D03;
 $tan: #EEEBE7;
 $light-tan: #F9F8F7;
+$dark-tan: #AF9F92;
+
+// Other Variables
+$radius: 3px;
 
 // Convert font-size to rem
 @function calculateRem($size) {
   $remSize: $size / 16px;
   @return $remSize * 1rem;
 }
-
 @mixin font-size($size) {
   font-size: $size;
   font-size: calculateRem($size);
@@ -41,4 +45,16 @@ $light-tan: #F9F8F7;
   background: nth(nth($color-stops, 1), 1);
   background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
   background: linear-gradient($direction, $color-stops);
+}
+
+// Fonts
+@mixin droid($size, $weight) {
+  font-family: Droid Serif, serif;
+  @include font-size($size);
+  font-weight: $weight;
+}
+@mixin open($size, $weight) {
+  font-family: Open Sans, sans-serif;
+  @include font-size($size);
+  font-weight: $weight;
 }

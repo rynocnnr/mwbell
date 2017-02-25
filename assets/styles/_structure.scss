@@ -4,8 +4,8 @@ body {
     background-color: $orange;
     color: $white;
     padding: 15px 50px;
-    border-radius: 3px;
-    @include font-size(12px);
+    border-radius: $radius;
+    @include open(12px, normal);
     @include transition(background-color .5s ease);
     &:hover {
       background-color: darken($orange, 10%);
@@ -33,35 +33,132 @@ header {
   .topbar {
     background-color: $brown;
     color: $tan;
-    padding: 10px 0px;
-    @include font-size(13px);
+    padding: 15px 0px;
+    @include open(12px, normal);
+    span {
+      i {
+        display: inline-block;
+        vertical-align: bottom;
+        color: $dark-tan;
+        font-size: 18px;
+        margin-right: 5px;
+      }
+    }
+  }
+  nav {
+    .logo {
+      width: 220px;
+      float: left;
+      @media screen and (max-width: 810px) {
+        clear: both;
+        width: 100%;
+        text-align: center;
+      }
+      img {
+        padding: 10px 0px;
+        display: inline;
+      }
+      h2 {
+        display: inline;
+        @include open(24px, normal);
+        color: $dark-brown;
+      }
+      h3 {
+        color: $dark-tan;
+        display: block;
+        margin-left: 50px;
+        margin-top: -28px;
+        @include open(14px, normal);
+        @media screen and (max-width: 810px) {
+          margin-left: 0px;
+        }
+      }
+    }
+    ul {
+      float: right;
+      margin: 15px 0px;
+      @media screen and (max-width: 810px) {
+        clear: both;
+        float: none;
+        text-align: center;
+      }
+      li {
+        display: inline-block;
+        a {
+          display: block;
+          @include open(12px, normal);
+          text-transform: uppercase;
+          color: $dark-brown;
+          margin-left: 15px;
+          padding: 5px 10px;
+          @media screen and (max-width: 900px) {
+            margin-left: 10px;
+            padding: 5px;
+          }
+          &:hover {
+            color: $orange;
+            background-color: $light-tan;
+            radius: $radius;
+          }
+        }
+      }
+    }
   }
 }
-section.main-image {
-  @include linear-gradient(115deg, blue 0%, rebeccapurple 25%, $dark-orange 100%);
-  padding: 100px;
-  color: $white;
-}
-section.services {
-  background-color: $tan;
-}
-section.featured-services {
-  background-color: $light-tan;
-}
-section.c2a {
-  @include linear-gradient(135deg, $dark-orange 30%, $orange 80%);
+section {
   padding: 30px 0px;
-  color: $white;
-  @include font-size(14px);
-  h2 {
-    font-size: 24px;
+  &.main-image {
+    @include linear-gradient(115deg, blue 0%, rebeccapurple 25%, $dark-orange 100%);
+    color: $white;
+    padding: 100px;
+    margin-bottom: -33px;
+  }
+  &.quick-contact {
+    padding: 0px;
+    position: relative;
+    .qcform {
+      padding: 20px;
+      background-color: $dark-gray;
+      border-radius: $radius;
+      position: relative;
+    }
+  }
+  &.services {
+    background-color: $tan;
+    margin-top: -33px;
+    padding-top: 100px;
+    h2 {
+      font-weight: 300;
+      @include font-size(24px);
+      color: $dark-brown;
+      text-align: center;
+    }
+    h3 {
+      @include droid(12px, 300);
+      font-style: italic;
+      text-align: center;
+      color: $gray;
+    }
+  }
+  &.featured-services {
+    background-color: $light-tan;
+  }
+  &.c2a {
+    @include linear-gradient(135deg, $dark-orange 30%, $orange 80%);
+    padding: 30px 0px;
+    color: $white;
+    @include open(14px, normal);
+    h2 {
+      font-size: 24px;
+    }
   }
 }
+
 footer {
   background-color: $brown;
   color: rgba($tan, .7);
   padding-top: 30px;
-  @include font-size(12px);
+  @include open(12px, normal);
   h2 {
     font-size: 14px;
     color: $tan;
@@ -71,6 +168,6 @@ footer {
     margin-top: 30px;
     background-color: $dark-brown;
     color: rgba($tan, .3);
-    @include font-size(13px);
+    @include open(13px, normal);
   }
 }

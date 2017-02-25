@@ -9,23 +9,27 @@ var uglifycss = require('gulp-uglifycss');
 var reload = browserSync.reload;
 var shell = require('gulp-shell');
 var image = require('gulp-image');
+var googleWebFonts = require('gulp-google-webfonts');
 
 var paths = {
       'bower': './bower_components',
+      'node': './node_modules',
       'assets': './assets',
       'css': './assets/styles',
       'js': './assets/scripts',
-      'img': './assets/images'
+      'img': './assets/images',
+      'fonts': '../../assets/styles'
     }
 
 var dest = {
   'site': '_site',
   'js': '_site/js',
   'css': '_site/css',
-  'img': '_site/images'
+  'img': '_site/images',
+  'fonts': '_site/fonts'
 }
 
-gulp.task('serve', ['jekyll-build', 'styles', 'scripts', 'images', 'watch'], function() {
+gulp.task('serve', ['jekyll-build', 'fonts', 'images', 'styles', 'scripts', 'watch'], function() {
   browserSync.init({
     server: {
         baseDir: dest.site
@@ -68,7 +72,7 @@ gulp.task('styles', function() {
   .pipe(sass({
     includePaths: [
       paths.bower + '/foundation-sites/scss'
-    ]
+  ]
   }))
   .pipe(autoprefixer(
       'last 2 version',
@@ -103,6 +107,18 @@ gulp.task('scripts', function() {
   .pipe(rename('app.min.js'))
   .pipe(uglify())
   .pipe(gulp.dest(dest.js));
+});
+
+// Fonts
+var options = {
+	cssDir: paths.fonts,
+	cssFilename: '_myGoogleFonts.scss'
+};
+
+gulp.task('fonts', function () {
+    return gulp.src('assets/fonts/fonts.list')
+        .pipe(googleWebFonts(options))
+        .pipe(gulp.dest(dest.fonts));
 });
 
 // Default Task
