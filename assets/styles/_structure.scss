@@ -1,5 +1,22 @@
 body {
   background-color: $dark-brown;
+  blockquote {
+    @include droid(20px, normal);
+    color: $dark-tan;
+    font-style: italic;
+    border-left: solid 1px $light-gray;
+    @include breakpoint(small only) {
+      font-size: 16px;
+    }
+    .name {
+      @include open(14px, bold);
+      font-style: normal;
+      color: $gray;
+      @include breakpoint(small only) {
+        font-size: 12px;
+      }
+    }
+  }
   .button {
     background-color: $orange;
     color: $white;
@@ -7,6 +24,7 @@ body {
     border-radius: $radius;
     @include open(12px, normal);
     @include transition(background-color .5s ease);
+    text-decoration: none !important;
     &:hover {
       background-color: darken($orange, 10%);
     }
@@ -27,6 +45,23 @@ body {
       color: $orange;
     }
   }
+  .button-none {
+    background-color: transparent;
+    border: none;
+    color: $orange;
+    &:hover {
+      background-color: transparent;
+      color: darken($orange, 30%);
+    }
+  }
+  .button-block {
+    width: 100%;
+  }
+  .button-tiny {
+    padding: 10px 20px !important;
+    font-size: 11px;
+    margin: 0px;
+  }
 }
 header {
   background-color: $white;
@@ -34,7 +69,10 @@ header {
     background-color: $brown;
     color: $tan;
     padding: 15px 0px;
-    @include open(12px, normal);
+    @include open(14px, normal);
+    @include breakpoint(medium down) {
+      font-size: 11px;
+    }
     span {
       i {
         display: inline-block;
@@ -107,51 +145,265 @@ header {
 }
 section {
   padding: 30px 0px;
+  h2 {
+    font-weight: 300;
+    @include font-size(24px);
+    color: $dark-brown;
+    text-align: center;
+  }
+  h3 {
+    @include droid(12px, 300);
+    font-style: italic;
+    text-align: center;
+    color: $gray;
+    margin-top: -10px;
+  }
+  h4 {
+    @include open(18px, 300);
+    text-align: center;
+    color: $dark-brown;
+  }
   &.main-image {
-    @include linear-gradient(115deg, blue 0%, rebeccapurple 25%, $dark-orange 100%);
-    color: $white;
-    padding: 100px;
-    margin-bottom: -33px;
+    background: url('../images/smiling-family.png') no-repeat center center;
+    background-size: cover;
+    height: 650px;
+    &.bp {
+      margin: 0px;
+      padding: 0px;
+    }
+    .badges {
+      img {
+        margin-right: 50px;
+      }
+    }
   }
   &.quick-contact {
+    // top: 10px;
     padding: 0px;
-    position: relative;
+    margin-top: -140px;
+    margin-bottom: 55px;
+    // position: relative;
+    &.bp {
+      position: static;
+      background-color: $dark-gray;
+      margin: 0px;
+    }
     .qcform {
-      padding: 20px;
+      //padding: 20px 20px 0px 20px;
       background-color: $dark-gray;
       border-radius: $radius;
-      position: relative;
+    }
+    input {
+      border: 0;
+      float: left;
+      @include open(14px, normal);
+      color: $brown;
+      &[type='checkbox'] {
+        width: auto;
+        margin-top: 10px;
+        margin-right: 10px;
+        +label {
+          display: block;
+          color: $dark-tan;
+          margin: 6px 0px 0px 0px;
+          float: left;
+          font-style: italic;
+        }
+      }
+      &::placeholder {
+        @include open(12px, normal);
+        color: $dark-tan;
+      }
     }
   }
   &.services {
     background-color: $tan;
-    margin-top: -33px;
+    // margin-top: -33px;
     padding-top: 100px;
-    h2 {
-      font-weight: 300;
-      @include font-size(24px);
-      color: $dark-brown;
-      text-align: center;
+    &.bp {
+      margin-top: 0px;
+      background-color: $white;
+      padding-top: 0px;
     }
-    h3 {
-      @include droid(12px, 300);
-      font-style: italic;
-      text-align: center;
-      color: $gray;
+    .medium-4 {
+      padding: 0px 5%;
+    }
+    img {
+      margin: 30px 0px;
+    }
+    h2 {
+      margin-top: 55px; // push down for blockquote on homepage
+    }
+    h4 {
+      color: $dark-brown;
+      @include open(14px, 500);
+      margin: 0px;
+    }
+    p {
+      color: $dark-brown;
+      @include open(12px, normal);
+      margin-bottom: 40px;
     }
   }
   &.featured-services {
     background-color: $light-tan;
+    & div.column {
+      position: relative;
+      text-align: center;
+      min-height: 47px;
+      line-height: 47px;
+    }
+    @media screen and (max-width: 640px) {
+      img {
+        margin-bottom: 30px;
+      }
+    }
   }
+  &.testimonials {
+    background-color: $white;
+    p {
+      text-align: center;
+      &.testimony {
+        @include open(18px, 100);
+        font-style: italic;
+        color: $brown;
+        margin-top: 50px;
+        line-height: 38px;
+      }
+      &.stars {
+        color: $gold;
+        i {
+          padding: 2px;
+        }
+      }
+      &.patient-name {
+        @include open(11px, bold);
+        color: $brown;
+      }
+    }
+  }
+}
   &.c2a {
     @include linear-gradient(135deg, $dark-orange 30%, $orange 80%);
     padding: 30px 0px;
     color: $white;
     @include open(14px, normal);
-    h2 {
-      font-size: 24px;
+    h2, h3 {
+      color: $white;
+    }
+    .button {margin-top: 30px;}
+    .icons {
+      margin: 30px 0px;
+      div.columns {
+        position: relative;
+        text-align: center;
+        min-height: 79px;
+        line-height: 79px;
+      }
     }
   }
+  &.section-header {
+    background-color: $tan;
+    text-align: center;
+    h1 {
+      @include open(24px, 600);
+      color: $dark-brown;
+      text-transform: uppercase;
+    }
+    .crumbs {
+      @include open(12px, normal);
+      text-transform: uppercase;
+      color: $orange;
+      span {
+        font-weight: bold;
+        color: $dark-brown;
+      }
+      a {
+        color: $dark-brown;
+        font-weight: 600;
+        &:hover {
+          color: lighten($dark-brown, 30%);
+        }
+      }
+    }
+  }
+  &.main-content {
+    background-color: $white;
+    hr {
+      border: none;
+      height: 1px;
+      background-color: lighten($light-gray, 10%);
+      margin: 50px 0px;
+    }
+    p, ul, ol {
+      @include open(14px, 100);
+      color: $dark-gray;
+    }
+    a {
+      color: $orange;
+      text-decoration: underline;
+      &:hover {
+        color: $dark-orange;
+        text-decoration: none;
+      }
+    }
+    .leadin {
+      margin-top: 30px;
+      p {
+        @include open(18px, 100);
+        line-height: 34px;
+        text-align: center;
+      }
+      ul {
+        li {
+          list-style-type: decimal;
+          line-height: 34px;
+          a {
+            color: $dark-orange;
+            @include open(18px, 100);
+          }
+        }
+      }
+    }
+    .staff {
+      margin-top: 50px;
+      .name {
+        @include open(14px, 600);
+        color: $brown;
+      }
+      .title {
+        @include open(12px, 100);
+        color: $brown;
+        display: block;
+        margin-top: px;
+      }
+    }
+    .technologies {
+      text-align: center;
+      h4 {
+        margin-top: 50px;
+      }
+      p {
+        @include open(12px, $dark-gray);
+      }
+    }
+  }
+// Slick Carousel
+.slick-arrow {
+    position: absolute;
+    top: 50%;
+    color: $orange;
+    font-size: 24px !important;
+    &.fa-arrow-left {
+      left: -20px;
+    }
+    &.fa-arrow-right {
+      right: -20px;
+    }
+    &:hover {
+      color: $dark-orange;
+      cursor: pointer;
+    }
 }
 
 footer {
@@ -161,13 +413,57 @@ footer {
   @include open(12px, normal);
   h2 {
     font-size: 14px;
+    font-weight: 500;
     color: $tan;
+  }
+  i.fa {
+    font-size: 30px;
+  }
+  p {
+    @include open(11px, normal);
+    color: $dark-tan;
+  }
+  .social {
+    a {
+      color: $dark-tan;
+      display: inline-block;
+      margin: 0px 5px 5px 0px;
+      i {
+        font-size: 24px;
+      }
+      &:hover {
+        color: darken($dark-tan, 40%);
+      }
+    }
+  }
+  ul {
+    margin: 0px;
+    list-style-type: none;
+    li {
+      a {
+        @include open(11px, normal);
+        line-height: 24px;
+        color: $dark-tan;
+        &:hover {
+          color: darken($dark-tan, 40%);
+          text-decoration: underline;
+        }
+      }
+    }
   }
   .ftrext {
     padding-top: 30px;
     margin-top: 30px;
     background-color: $dark-brown;
-    color: rgba($tan, .3);
-    @include open(13px, normal);
+    p {
+      color: rgba($tan, 0.25);
+      @include open(11px, normal);
+    }
+    a {
+      color: darken($dark-orange, 10%);
+      &:hover {
+        color: rgba($tan, 0.25);
+      }
+    }
   }
 }

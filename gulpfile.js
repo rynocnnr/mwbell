@@ -17,8 +17,9 @@ var paths = {
       'assets': './assets',
       'css': './assets/styles',
       'js': './assets/scripts',
-      'img': './assets/images',
-      'fonts': '../../assets/styles'
+      'img': './assets/images/**',
+      'fonts': '../../assets/styles',
+      'forms': './assets/forms/**.*'
     }
 
 var dest = {
@@ -26,15 +27,21 @@ var dest = {
   'js': '_site/js',
   'css': '_site/css',
   'img': '_site/images',
-  'fonts': '_site/fonts'
+  'fonts': '_site/fonts',
+  'forms': '_site/forms'
 }
 
-gulp.task('serve', ['jekyll-build', 'fonts', 'images', 'styles', 'scripts', 'watch'], function() {
+gulp.task('serve', ['jekyll-build', 'fonts', 'styles', 'scripts', 'watch'], function() {
   browserSync.init({
     server: {
         baseDir: dest.site
     }
   });
+  return gulp.src([
+    paths.forms
+  ])
+  .pipe(gulp.dest(dest.forms));
+
 });
 
 // Rebuild Jekyll
@@ -48,6 +55,7 @@ gulp.task('watch', function() {
     gulp.watch(paths.css + '/**/*.scss', ['styles']);
     gulp.watch(paths.js + '/**/*.js', ['scripts']);
     gulp.watch(paths.img, ['images']);
+    gulp.watch(paths.forms, ['forms']);
 });
 
 // Sync Browser
@@ -58,7 +66,7 @@ gulp.task('sync', ['jekyll-build'], function() {
 // images
 gulp.task('images', function() {
   return gulp.src([
-    paths.img + '/*'
+    paths.img
   ])
   .pipe(image())
   .pipe(gulp.dest(dest.img));
@@ -67,7 +75,8 @@ gulp.task('images', function() {
 // Styles
 gulp.task('styles', function() {
   return gulp.src([
-    paths.css + '/app.scss'
+    paths.css + '/app.scss',
+    paths.node + '/slick-carousel/slick/slick.scss'
   ])
   .pipe(sass({
     includePaths: [
@@ -97,10 +106,12 @@ gulp.task('styles', function() {
 // Scripts
 gulp.task('scripts', function() {
   gulp.src([
-    paths.bower + '/modernizr/modernizr.js',
+    // paths.bower + '/modernizr/modernizr.js',
     paths.bower + '/jquery/dist/jquery.js',
-    paths.bower + '/foundation-sites/js/foundation.js',
-    paths.bower + '/foundation-sites/js/foundation.alert.js',
+    paths.bower + '/foundation-sites/dist/js/foundation.js',
+    // paths.bower + '/foundation-sites/dist/js/plugins/foundation.reveal.js',
+    // paths.bower + '/foundation-sites/dist/js/plugins/foundation.alert.js',
+    paths.node + '/slick-carousel/slick/slick.js',
     paths.js + '/app.js'
   ])
   .pipe(concat('app.js'))
@@ -119,6 +130,14 @@ gulp.task('fonts', function () {
     return gulp.src('assets/fonts/fonts.list')
         .pipe(googleWebFonts(options))
         .pipe(gulp.dest(dest.fonts));
+});
+
+// forms
+gulp.task('forms', function() {
+  return gulp.src([
+    paths.forms
+  ])
+  .pipe(gulp.dest(dest.forms));
 });
 
 // Default Task
